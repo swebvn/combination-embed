@@ -9,16 +9,15 @@ const { option } = defineProps<{
 
 <template>
     <div>
-        <label for="" v-text="option.label" />
+        <div class="option-label" for="" v-text="option.label" />
 
         <div class="values-wrapper">
             <template v-for="value in option.values" :key="value.id">
                 <label class="value-wrapper">
-                    <input type="radio" :name="`option-${option.id}`" :value="value.id" required style="display: none;">
+                    <input type="radio" :name="`option-${option.id}`" :value="value.id" required style="display: none">
 
-                    <div class="value-label">
-                        <span v-text="value.name"></span>
-                    </div>
+                    <div v-if="!value.color" class="basic-value" v-text="value.name" />
+                    <div v-else="value.color" class="color-swatch" :style="{ background: value.color }"></div>
                 </label>
             </template>
         </div>
@@ -26,21 +25,41 @@ const { option } = defineProps<{
 </template>
 
 <style>
+.option-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
 .values-wrapper {
     margin-top: 0.5rem;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
 }
-.value-label {
+
+.basic-value {
     font-size: 0.85rem;
     border: 1px solid #e3e3e3;
     border-radius: 0.25rem;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
 }
-input:checked + .value-label {
+
+input:checked+.basic-value {
     background-color: #44976b;
     color: #fff;
+    outline: 2px solid #44976b;
+    outline-offset: 0.5px;
+}
+.color-swatch {
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border-radius: 100%;
+    cursor: pointer;
+}
+input:checked + .color-swatch {
+    outline: 2px solid #44976b;
+    outline-offset: 2px;
 }
 </style>
