@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 import { Option } from '../lib/types';
+import { form } from '../store';
 
 const { option } = defineProps<{
     option: Option
@@ -14,7 +15,7 @@ const { option } = defineProps<{
         <div class="values-wrapper">
             <template v-for="value in option.values" :key="value.id">
                 <label class="value-wrapper">
-                    <input type="radio" :name="`option-${option.id}`" :value="value.id" required style="display: none">
+                    <input type="radio" v-model="form.options[option.id]" :name="`option-${option.id}`" :value="value.id" required style="display: none">
 
                     <div v-if="!value.color" class="basic-value" v-text="value.name" />
                     <div v-else="value.color" class="color-swatch" :style="{ background: value.color }"></div>

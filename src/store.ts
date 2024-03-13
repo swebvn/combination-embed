@@ -2,7 +2,7 @@ import { reactive } from 'vue'
 
 export type FormState = {
     options: {
-        [key: string]: string
+        [key: string]: number
     },
     quantity: number
 }
