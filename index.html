@@ -8,6 +8,23 @@
   </head>
   <body>
     <div id="app"></div>
+    <script type="text/javascript">
+        window.combinationEmbed = {
+            combinationId: 5,
+            product: {
+                id: 1,
+                name: 'This is an example product',
+                price: 100,
+                sku: 'abc123',
+                image:  'https://via.placeholder.com/500'
+            },
+            injectors: {
+                target: '#app',
+                preview: '.gallery',
+                price: '.price',
+            }
+        }
+    </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
