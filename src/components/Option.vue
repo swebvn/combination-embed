@@ -8,7 +8,9 @@ const { option, dependsOn } = defineProps<{
     dependsOn?: number[]
 }>()
 
-const values = computed(() => option.values)
+const values = computed(() => {
+    return option.values
+})
 </script>
 
 <template>

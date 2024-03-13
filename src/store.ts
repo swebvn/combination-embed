@@ -1,4 +1,5 @@
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
+import { Combination } from './lib/types'
 
 export type FormState = {
     options: {
@@ -10,4 +11,10 @@ export type FormState = {
 export const form = reactive<FormState>({
     options: {},
     quantity: 1
+})
+
+export const store = reactive<{
+    combination: Combination|null
+}>({
+    combination: null
 })
