@@ -28,3 +28,14 @@ export type Value = {
     image_src: string
     size_chart_src: string
 }
+
+export type Variant = {
+    id: number
+    price: number
+    price_formatted: string
+    image_src: string
+    value_ids: number[]
+    options_map: {
+        [key: string]: number
+    }
+}

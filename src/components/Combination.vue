@@ -2,10 +2,20 @@
 import { Combination } from '../lib/types';
 import Option from './Option.vue';
 import { form } from '../store';
+import { onMounted } from 'vue';
 
 const { combination } = defineProps<{
     combination: Combination
 }>()
+
+
+onMounted(() => {
+    if (Object.keys(form.options).length === 0) {
+        form.options = combination.variants[0].options_map;
+    }
+})
+
+
 </script>
 <template>
     <form>
