@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import type {Product} from "./lib/types.ts";
-import {getCombination} from "./services/customedge.ts";
-import {ref, onMounted, defineProps} from "vue";
+import { type Product } from "./lib/types.ts";
+import { getCombination } from "./services/customedge.ts";
+import { ref, onMounted, defineProps } from "vue";
+import Combination from "./components/Combination.vue";
 
 export type AppProps = {
   product: Product,
@@ -10,18 +11,14 @@ export type AppProps = {
 
 const props = defineProps<AppProps>()
 
-console.log('in app')
-
 const loading = ref(false)
-const combination = ref(null)
+const combination = ref<Combination | null>(null)
 
 onMounted(async () => {
-  loading.value = false;
-  combination.value = await getCombination(props.combinationId)
-   console.log('combination ', combination.value)
   loading.value = true;
+  combination.value = await getCombination(props.combinationId)
+  loading.value = false;
 })
-
 </script>
 
 <template>
@@ -29,8 +26,7 @@ onMounted(async () => {
     <div v-if="loading">loading...</div>
 
     <div v-if="combination">
-      combination: {{ combination.name }}
+      <Combination :combination="combination" />
     </div>
   </div>
 </template>
-
