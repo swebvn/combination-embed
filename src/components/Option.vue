@@ -3,8 +3,9 @@ import { computed, defineProps } from 'vue';
 import { Option } from '../lib/types';
 import { form } from '../store';
 
-const { option } = defineProps<{
-    option: Option
+const { option, dependsOn } = defineProps<{
+    option: Option,
+    dependsOn?: number[]
 }>()
 
 const values = computed(() => option.values)
@@ -13,6 +14,7 @@ const values = computed(() => option.values)
 <template>
     <div>
         <div class="option-label" for="" v-text="option.label" />
+        <div>{{  dependsOn }}</div>
 
         <div class="values-wrapper">
             <template v-for="value in values" :key="value.id">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Combination } from '../lib/types';
+import { type Combination, type Option as OptionType } from '../lib/types';
 import Option from './Option.vue';
 import { form } from '../store';
 import { onMounted } from 'vue';
@@ -8,6 +8,8 @@ const { combination } = defineProps<{
     combination: Combination
 }>()
 
+console.log(combination.options)
+
 
 onMounted(() => {
     if (Object.keys(form.options).length === 0) {
@@ -15,11 +17,20 @@ onMounted(() => {
     }
 })
 
+function findDependentOptions(option: OptionType): number[] {
+    return combination.options.filter((opt) => {
+        return opt.position < option.position
+    }).map(opt => opt.id)
+}
+
 
 </script>
 <template>
     <form>
-        <Option v-for="option in combination.options" :key="option.id" :option="option" />
+        <Option v-for="option in combination.options" :key="option.id"
+         :option="option"
+         :depends-on="findDependentOptions(option)"
+          />
 
         <button type="submit">Add to cart</button>
 
