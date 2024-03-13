@@ -58,11 +58,13 @@ input:checked+.basic-value {
     width: 2.25rem;
     height: 2.25rem;
     padding: 0;
+    border: 1px solid #e3e3e3;
     border-radius: 100%;
     cursor: pointer;
 }
 input:checked + .color-swatch {
     outline: 2px solid #44976b;
     outline-offset: 2px;
+    border-color: transparent;
 }
 </style>
