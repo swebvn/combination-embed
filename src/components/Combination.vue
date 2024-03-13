@@ -8,7 +8,6 @@ const { combination } = defineProps<{
 </script>
 <template>
     <form>
-        <strong>{{ combination.name }}</strong>
         <Option v-for="option in combination.options" :key="option.id" :option="option" />
     </form>
 </template>

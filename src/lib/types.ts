@@ -23,7 +23,7 @@ export type Option = {
 
 export type Value = {
     id: number
-    value: string
+    name: string
     color: string
     image_src: string
     size_chart_src: string
