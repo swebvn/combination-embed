@@ -33,7 +33,7 @@ const { option } = defineProps<{
 .values-wrapper {
     margin-top: 0.5rem;
     display: flex;
-    gap: 1rem;
+    gap: 0.85rem;
     flex-wrap: wrap;
 }
 
@@ -43,6 +43,8 @@ const { option } = defineProps<{
     border-radius: 0.25rem;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
+    min-width: 2rem;
+    text-align: center;
 }
 
 input:checked+.basic-value {
@@ -52,8 +54,8 @@ input:checked+.basic-value {
     outline-offset: 0.5px;
 }
 .color-swatch {
-    width: 2rem;
-    height: 2rem;
+    width: 2.25rem;
+    height: 2.25rem;
     padding: 0;
     border-radius: 100%;
     cursor: pointer;

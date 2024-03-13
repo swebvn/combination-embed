@@ -1,13 +1,13 @@
 import { reactive } from 'vue'
 
-export type StoreState = {
+export type FormState = {
     options: {
         [key: string]: string
     },
     quantity: number
 }
 
-export const store = reactive<StoreState>({
+export const form = reactive<FormState>({
     options: {},
     quantity: 1
 })
