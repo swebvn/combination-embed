@@ -1,9 +1,7 @@
 import { createApp } from 'vue'
 import './style.css'
-import App from './App.vue'
+import App, {AppProps} from './App.vue'
 
-const config = window.combinationEmbed;
+const config = window.combinationEmbed as AppProps;
 
-createApp(App, {
-    ...config
-}).mount(config.injectors.target || '#app')
+createApp(App, config).mount('#app')
