@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { computed, defineProps } from 'vue';
 import { Option } from '../lib/types';
 import { form } from '../store';
 
 const { option } = defineProps<{
     option: Option
 }>()
+
+const values = computed(() => option.values)
 </script>
 
 <template>
@@ -13,7 +15,7 @@ const { option } = defineProps<{
         <div class="option-label" for="" v-text="option.label" />
 
         <div class="values-wrapper">
-            <template v-for="value in option.values" :key="value.id">
+            <template v-for="value in values" :key="value.id">
                 <label class="value-wrapper">
                     <input type="radio" v-model="form.options[option.id]" :name="`option-${option.id}`" :value="value.id" required style="display: none">
 

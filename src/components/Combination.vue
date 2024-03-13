@@ -20,6 +20,7 @@ onMounted(() => {
 <template>
     <form>
         <Option v-for="option in combination.options" :key="option.id" :option="option" />
+
         <button type="submit">Add to cart</button>
 
         <pre>{{ JSON.stringify(form, null, 2) }}</pre>
