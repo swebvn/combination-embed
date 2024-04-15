@@ -37,11 +37,11 @@ onMounted(async () => {
 // })
 
 watch(() => variant, (newVal) => {
-  console.log('new value', newVal.price)
-  if (newVal) {
+  console.log('new value', newVal.value)
+  if (newVal.value) {
     const element = document.querySelector(props.injectors.price)
     if (element) {
-      element.innerHTML = newVal.price;
+      element.innerHTML = '$' + newVal.value.price;
     }
   }
 }, {deep: true})

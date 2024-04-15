@@ -1,5 +1,5 @@
-import {computed, reactive, ref, watch} from 'vue'
-import {Combination, Variant} from './lib/types'
+import {computed, reactive, ref, unref} from 'vue'
+import {Combination} from './lib/types'
 
 export type FormState = {
     options: {
@@ -17,12 +17,6 @@ export const form = reactive<FormState>({
     quantity: 1
 })
 
-watch(
-    () => form.options,
-    () => findVariant(),
-    {deep: true}
-)
-
 const combination = ref<Combination | null>(null)
 
 export function setCombination(value: Combination) {
@@ -33,17 +27,18 @@ export const options = computed(() => combination.value?.options || [])
 
 export const variants = computed(() => combination.value?.variants.filter(v => v.price > 0) || [])
 
-export const variant = ref<Variant|undefined>()
+export const variant = computed(() => {
+    const selectedValueIds = Object.values(form.options);
+    console.log('selected value ids', selectedValueIds)
 
-function findVariant() {
-    const result = variants.value.find(v => {
-        return Object.keys(form.options).every(key => {
-            // console.log(v.options_map);
-            return form.options[key] === v.options_map[parseInt(key)]
-        })
-    })
+    const found = variants.value.find(variant => {
+        for (let i = 0; i < variant.value_ids.length; i++) {
+            if (!selectedValueIds.includes(variant.value_ids[i])) {
+                return false;
+            }
+        }
+        return true;
+    });
 
-    console.log('find result', result)
-
-    variant.value = result
-}
+    return found
+});
