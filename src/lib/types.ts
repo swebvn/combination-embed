@@ -10,6 +10,7 @@ export type Combination = {
     id: number
     name: string
     options: Option[]
+    extra_options: Option[]
     variants: Variant[]
 }
 

@@ -45,17 +45,13 @@ const values = computed(() => {
   }
 
   if (!valuesSet.has(form.options[optionId])) {
-    console.log('the value set does not have the current value')
     let firstValue = valuesSet.values().next().value;
-    console.log('find the first value of set', firstValue)
 
-    form.options[optionId] = firstValue; // this not trigger the computed property depends on the form.options
-    // fix this pls
+    form.options[optionId] = firstValue;
   }
 
   return option.values.filter(value => valuesSet.has(value.id));
 })
-
 </script>
 
 <template>
@@ -88,12 +84,9 @@ const values = computed(() => {
 </template>
 
 <style>
-.TooltipContent {
-  color: red;
-}
 .option-label {
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .values-wrapper {
