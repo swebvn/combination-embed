@@ -36,12 +36,7 @@ const values = computed(() => {
     }
   }
 
-  if (optionId === 4) {
-    console.log('values set', valuesSet, dependsOn)
-  }
-
   if (valuesSet.size === 0) {
-    console.log('values set is empty', optionId, form.options)
     return option.values;
   }
 

@@ -33,22 +33,22 @@ onMounted(async () => {
   loading.value = false;
 })
 
-// onBeforeMount(function hideOldPrice() {
-//   const priceWrapper = document.querySelector(props.injectors.price);
-//   if (priceWrapper) {
-//     priceWrapper.innerHTML = '';
-//   }
-// })
+onBeforeMount(function hideOldPrice() {
+  const priceWrapper = document.querySelector(props.injectors.price);
+  if (priceWrapper) {
+    priceWrapper.innerHTML = '';
+  }
+})
 
 watch(
     () => variant.value,
     (newVal) => {
-      if (newVal) {
-        const priceWrapper = document.querySelector(props.injectors.price);
-        if (priceWrapper) {
-          priceWrapper.innerHTML = newVal.price_formatted;
-        }
-      }
+      // if (newVal) {
+      //   const priceWrapper = document.querySelector(props.injectors.price);
+      //   if (priceWrapper) {
+      //     priceWrapper.innerHTML = newVal.price_formatted;
+      //   }
+      // }
     },
     {deep: true}
 )
@@ -60,25 +60,24 @@ watch(
     <TooltipProvider :delay-duration="100">
       <div v-if="loading">loading...</div>
 
+      <div v-if="variant" :key="variant?.id">
+        <!-- price -->
+        <Teleport :to="props.injectors.price">
+          <span class="price">{{ variant.price_formatted }}</span>
+        </Teleport>
+
+        <!-- preview image -->
+        <Teleport :to="props.injectors.preview">
+          <div class="thumbnail">
+            <img :src="variant.image_src" class="object-cover" alt="preview image">
+          </div>
+        </Teleport>
+      </div>
+      <div v-else>No variant found</div>
+
       <div v-if="combinationData">
         <Combination :combination="combinationData"/>
       </div>
-
-      <input type="hidden" name="variant_id" :value="variant?.id"/>
-
-      <!--      <div v-if="variant" :key="variant?.id">-->
-      <!--        &lt;!&ndash; price &ndash;&gt;-->
-      <!--        <Teleport :to="props.injectors.price">-->
-      <!--          <span class="price">{{ variant.price_formatted }}</span>-->
-      <!--        </Teleport>-->
-
-      <!--        &lt;!&ndash; preview image &ndash;&gt;-->
-      <!--        <Teleport :to="props.injectors.preview">-->
-      <!--          <div class="thumbnail">-->
-      <!--            <img :src="variant.image_src" class="object-cover" alt="preview image">-->
-      <!--          </div>-->
-      <!--        </Teleport>-->
-      <!--      </div>-->
     </TooltipProvider>
   </div>
 </template>
