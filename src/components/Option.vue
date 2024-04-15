@@ -2,6 +2,7 @@
 import {computed, defineProps} from 'vue';
 import {Option} from '../lib/types';
 import {variants, form} from "../store";
+import {TooltipArrow, TooltipContent, TooltipProvider, TooltipRoot, TooltipTrigger} from 'radix-vue'
 
 const {option, dependsOn} = defineProps<{
   option: Option,
@@ -17,7 +18,7 @@ const values = computed(() => {
   let valuesSet: Set<number> = new Set();
 
   for (let i = 0; i < variants.value.length; i++) {
-    const variant = variants.value[i];
+    let variant = variants.value[i];
     let matched = true;
 
     for (let k = 0; k < dependsOn.length; k++) {
@@ -29,9 +30,6 @@ const values = computed(() => {
     }
 
     if (matched) {
-      if (optionId === 4) {
-        console.log('matched', variant.options_map[optionId], variant)
-      }
       valuesSet.add(variant.options_map[optionId]);
     }
   }
@@ -41,6 +39,7 @@ const values = computed(() => {
   }
 
   if (valuesSet.size === 0) {
+    console.log('values set is empty', optionId, form.options)
     return option.values;
   }
 
@@ -51,7 +50,6 @@ const values = computed(() => {
 
     form.options[optionId] = firstValue; // this not trigger the computed property depends on the form.options
     // fix this pls
-
   }
 
   return option.values.filter(value => valuesSet.has(value.id));
@@ -61,28 +59,38 @@ const values = computed(() => {
 
 <template>
   <div>
-    <div class="option-label" for="" v-text="option.label"/>
+    <div class="option-label" v-text="option.label"/>
 
     <div class="values-wrapper">
       <template v-for="value in values" :key="value.id">
-        <label class="value-wrapper">
-          {{ value.id}}
-          <input type="radio"
-                 v-model="form.options[option.id]"
-                 :name="`option-${option.id}`"
-                 :value="value.id"
-                 required
-                 style="display: none">
+        <TooltipRoot>
+          <TooltipTrigger as-child>
+            <label class="value-wrapper">
+              <input type="radio"
+                     v-model="form.options[option.id]"
+                     :name="`option-${option.id}`"
+                     :value="value.id"
+                     required
+                     style="display: none">
 
-          <div v-if="!value.color" class="basic-value" v-text="value.name"/>
-          <div v-else="value.color" class="color-swatch" :style="{ background: value.color }"/>
-        </label>
+              <div v-if="!value.color" class="basic-value" v-text="value.name"/>
+              <div v-else class="color-swatch" :style="{ background: value.color }"/>
+            </label>
+          </TooltipTrigger>
+          <TooltipContent style="padding: 4px 8px; color: white; font-size: 0.875rem; background: rgba(0, 0, 0,  0.9); border-radius: 4px;">
+            {{ value.name }}
+            <TooltipArrow />
+          </TooltipContent>
+        </TooltipRoot>
       </template>
     </div>
   </div>
 </template>
 
 <style>
+.TooltipContent {
+  color: red;
+}
 .option-label {
   font-size: 0.85rem;
   font-weight: 500;
