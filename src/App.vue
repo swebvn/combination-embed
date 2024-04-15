@@ -4,7 +4,7 @@ import {getCombination} from "./services/customedge.ts";
 import {ref, onMounted, defineProps, watch} from "vue";
 import Combination from "./components/Combination.vue";
 import {setCombination, variant} from "./store.ts";
-import {TooltipArrow, TooltipContent, TooltipProvider, TooltipRoot, TooltipTrigger} from 'radix-vue'
+import {TooltipProvider} from 'radix-vue'
 
 
 export type AppProps = {
@@ -41,6 +41,12 @@ watch(
         if (priceWrapper) {
           priceWrapper.innerHTML = newVal?.price_formatted;
         }
+
+        const galleryWrapper = document.querySelector(props.injectors.target);
+        if (galleryWrapper) {
+          galleryWrapper.append();
+
+        }
       }
     },
     {deep: true}
@@ -50,12 +56,28 @@ watch(
 
 <template>
   <div>
-    <TooltipProvider delay-duration="100">
+    <TooltipProvider :delay-duration="100">
       <div v-if="loading">loading...</div>
 
       <div v-if="combinationData">
         <Combination :combination="combinationData"/>
       </div>
+
+      <div v-if="variant">
+          <!-- price -->
+        <Teleport to="document.querySelector(props.injectors.price)">
+          <span class="price">{{ variant.price_formatted }}</span>
+        </Teleport>
+      </div>
     </TooltipProvider>
   </div>
 </template>
+
+<style>
+.price {
+  font-size: 2rem;
+  color: #16a34a;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+</style>

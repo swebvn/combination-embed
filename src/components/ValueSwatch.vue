@@ -36,9 +36,8 @@ if (value.image_src) {
 }
 
 input:checked + .value-text {
-  background-color: #16a34a;
-  color: #fff;
-  outline: 1px solid #16a34a;
+  background-color: #22c55e33;
+  outline: 1px solid #22c55e;
 }
 
 .value-color {
@@ -51,7 +50,7 @@ input:checked + .value-text {
 }
 
 input:checked + .value-color {
-  outline: 2px solid #16a34a;
+  outline: 2px solid #22c55e;
   outline-offset: 2px;
   border-color: transparent;
 }

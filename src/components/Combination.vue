@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import {type Combination, type Option as OptionType} from '../lib/types';
 import Option from './Option.vue';
-import {form, variant, variants} from '../store';
+import {form} from '../store';
 import {onMounted} from 'vue';
-import ExtraOption from "./ExtraOption.vue";
 
 const {combination} = defineProps<{
   combination: Combination
@@ -37,9 +36,6 @@ function findDependentOptions(option: OptionType): number[] {
 
 
     <button type="submit" id="btn-comb-add-to-cart">Add to cart</button>
-
-    <!--    <pre>{{ JSON.stringify(variants, null, 2) }}</pre>-->
-    <pre>{{ JSON.stringify(variant, null, 2) }}</pre>
     <pre>{{ JSON.stringify(form, null, 2) }}</pre>
   </form>
 </template>
