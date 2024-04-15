@@ -55,21 +55,20 @@ const values = computed(() => {
 }
 
 input:checked+.basic-value {
-    background-color: #44976b;
+    background-color: #16a34a;
     color: #fff;
-    outline: 2px solid #44976b;
-    outline-offset: 0.5px;
+    outline: 1px solid #16a34a;
 }
 .color-swatch {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2rem;
+    height: 2rem;
     padding: 0;
     border: 1px solid #e3e3e3;
     border-radius: 100%;
     cursor: pointer;
 }
 input:checked + .color-swatch {
-    outline: 2px solid #44976b;
+    outline: 2px solid #16a34a;
     outline-offset: 2px;
     border-color: transparent;
 }
