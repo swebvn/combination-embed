@@ -25,4 +25,4 @@ export function setCombination(value: Combination) {
 
 export const options = computed(() => combination.value?.options || [])
 
-export const variants = computed(() => combination.value?.variants || [])
+export const variants = computed(() => combination.value?.variants.filter(v => v.price > 0) || [])
