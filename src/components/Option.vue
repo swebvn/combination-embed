@@ -52,7 +52,6 @@ const values = computed(() => {
 <template>
   <div>
     <div class="option-label" for="" v-text="option.label"/>
-    <div>{{ dependsOn }}</div>
 
     <div class="values-wrapper">
       <template v-for="value in values" :key="value.id">
