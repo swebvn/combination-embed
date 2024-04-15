@@ -10,7 +10,7 @@ const {combination} = defineProps<{
 
 onMounted(function initDefaultVariant()  {
   if (Object.keys(form.options).length === 0) {
-    form.options = combination.variants[0].options_map;
+    form.options = {...combination.variants[0].options_map};
   }
 
   combination.extra_options.map(ex => {
