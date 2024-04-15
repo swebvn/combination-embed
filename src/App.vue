@@ -1,17 +1,20 @@
 <script setup lang="ts">
-import {type Product, type Combination as CombinationType} from "./lib/types.ts";
+import {type Product, type Combination as CombinationType, Variant} from "./lib/types.ts";
 import {getCombination} from "./services/customedge.ts";
-import {ref, onMounted, defineProps} from "vue";
+import {ref, onMounted, defineProps, watchEffect, watch} from "vue";
 import Combination from "./components/Combination.vue";
-import {setCombination} from "./store.ts";
+import {setCombination, variant} from "./store.ts";
 
 export type AppProps = {
   product: Product,
   combinationId: number,
   injectors: {
-    [key: string]: string
+    target: string,
+    preview: string
+    price: string
   }
 }
+
 
 const props = defineProps<AppProps>()
 
@@ -28,6 +31,21 @@ onMounted(async () => {
 
   loading.value = false;
 })
+
+// onMounted(() => {
+//   document.querySelector(props.injectors.price).innerHTML = variant.price;
+// })
+
+watch(() => variant, (newVal) => {
+  console.log('new value', newVal.price)
+  if (newVal) {
+    const element = document.querySelector(props.injectors.price)
+    if (element) {
+      element.innerHTML = newVal.price;
+    }
+  }
+}, {deep: true})
+
 </script>
 
 <template>
