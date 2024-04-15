@@ -71,7 +71,6 @@ const values = computed(() => {
                      :value="value.id"
                      required
                      style="display: none">
-
               <input type="radio"
                      v-else
                      v-model="form.options[option.id]"
