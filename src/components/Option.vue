@@ -55,7 +55,7 @@ const values = computed(() => {
     <div class="option-label" v-text="option.label"/>
 
     <div class="values-wrapper">
-      <template v-for="value in values" :key="value.id">
+      <template v-for="value in values" :key="`'value-${value.id}`">
         <TooltipRoot>
           <TooltipTrigger as-child>
             <label class="value-wrapper">

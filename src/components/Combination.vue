@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {type Combination, type Option as OptionType} from '../lib/types';
 import Option from './Option.vue';
-import {form} from '../store';
+import {form, variant} from '../store';
 import {onMounted} from 'vue';
 
 const {combination} = defineProps<{
@@ -31,20 +31,22 @@ function addToCart() {
 <template>
   <form @submit.prevent="addToCart">
     <Option v-for="option in combination.options"
-            :key="option.id"
+            :key="`options-${option.id}`"
             :option="option"
             :depends-on="findDependentOptions(option)"
             :is-extra="false"
     />
 
     <Option v-for="option in combination.extra_options"
-            :key="option.id"
+            :key="`option-${option.id}`"
             :option="option"
             :depends-on="[]"
             :is-extra="true"
     />
 
     <button type="submit" id="btn-comb-add-to-cart">Add to cart</button>
+
+    <pre>{{ JSON.stringify(variant, null, 2) }}</pre>
     <pre>{{ JSON.stringify(form, null, 2) }}</pre>
   </form>
 </template>
