@@ -7,7 +7,10 @@ import {setCombination} from "./store.ts";
 
 export type AppProps = {
   product: Product,
-  combinationId: number
+  combinationId: number,
+  injectors: {
+    [key: string]: string
+  }
 }
 
 const props = defineProps<AppProps>()
