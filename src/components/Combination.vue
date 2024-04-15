@@ -44,7 +44,6 @@ function addToCart() {
             :is-extra="true"
     />
 
-
     <button type="submit" id="btn-comb-add-to-cart">Add to cart</button>
     <pre>{{ JSON.stringify(form, null, 2) }}</pre>
   </form>
