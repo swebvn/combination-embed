@@ -22,15 +22,22 @@ const values = computed(() => {
 
     for (let k = 0; k < dependsOn.length; k++) {
       const dependOptionId = dependsOn[k];
-      if (variant.options_map[dependOptionId] !== form.options[dependOptionId.toString()]) {
+      if (variant.options_map[dependOptionId.toString()] !== form.options[dependOptionId.toString()]) {
         matched = false;
         break;
       }
     }
 
     if (matched) {
+      if (optionId === 4) {
+        console.log('matched', variant.options_map[optionId], variant)
+      }
       valuesSet.add(variant.options_map[optionId]);
     }
+  }
+
+  if (optionId === 4) {
+    console.log('values set', valuesSet, dependsOn)
   }
 
   if (valuesSet.size === 0) {
@@ -42,8 +49,9 @@ const values = computed(() => {
     let firstValue = valuesSet.values().next().value;
     console.log('find the first value of set', firstValue)
 
-    // we need to
-    form.options[optionId] = firstValue.toString();
+    form.options[optionId] = firstValue; // this not trigger the computed property depends on the form.options
+    // fix this pls
+
   }
 
   return option.values.filter(value => valuesSet.has(value.id));
@@ -58,7 +66,12 @@ const values = computed(() => {
     <div class="values-wrapper">
       <template v-for="value in values" :key="value.id">
         <label class="value-wrapper">
-          <input type="radio" v-model="form.options[option.id]" :name="`option-${option.id}`" :value="value.id" required
+          {{ value.id}}
+          <input type="radio"
+                 v-model="form.options[option.id]"
+                 :name="`option-${option.id}`"
+                 :value="value.id"
+                 required
                  style="display: none">
 
           <div v-if="!value.color" class="basic-value" v-text="value.name"/>
