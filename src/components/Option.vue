@@ -44,9 +44,7 @@ const values = computed(() => {
     form.options[optionId] = firstValue.toString();
   }
 
-  const values = option.values.filter(value => valuesSet.has(value.id));
-
-  return values;
+  return option.values.filter(value => valuesSet.has(value.id));
 })
 
 </script>
