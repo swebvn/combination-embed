@@ -38,7 +38,9 @@ const values = computed(() => {
   }
 
   if (!valuesSet.has(form.options[optionId])) {
+    console.log('the value set does not have the current value')
     let firstValue = valuesSet.values().next().value;
+    console.log('find the first value of set', firstValue)
 
     // we need to
     form.options[optionId] = firstValue.toString();

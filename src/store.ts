@@ -29,7 +29,6 @@ export const variants = computed(() => combination.value?.variants.filter(v => v
 
 export const variant = computed(() => {
     const selectedValueIds = Object.values(form.options);
-    console.log('selected value ids', selectedValueIds)
 
     const found = variants.value.find(variant => {
         for (let i = 0; i < variant.value_ids.length; i++) {
