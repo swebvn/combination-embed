@@ -76,7 +76,7 @@ watch(
 <style>
 .price {
   font-size: 2rem;
-  color: #16a34a;
+  color: #22c55e;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
