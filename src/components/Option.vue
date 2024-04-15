@@ -106,7 +106,7 @@ const values = computed(() => {
 .basic-value {
   font-size: 0.85rem;
   border: 1px solid #e3e3e3;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   padding: 0.25rem 0.5rem;
   cursor: pointer;
   min-width: 2rem;

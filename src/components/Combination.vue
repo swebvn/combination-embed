@@ -45,12 +45,13 @@ form {
 #btn-comb-add-to-cart {
   background-color: #16a34a;
   color: #fff;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
   border: none;
   border-radius: 0.25rem;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 700;
   transition: background-color 0.2s;
+  text-transform: uppercase;
 }
 </style>
