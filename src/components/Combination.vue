@@ -45,7 +45,7 @@ function addToCart() {
     />
 
     <button type="submit" id="btn-comb-add-to-cart">Add to cart</button>
-<!--    <pre>{{ JSON.stringify(form, null, 2) }}</pre>-->
+    <pre>{{ JSON.stringify(form, null, 2) }}</pre>
   </form>
 </template>
 

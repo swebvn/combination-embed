@@ -28,7 +28,7 @@ export const options = computed(() => combination.value?.options || [])
 export const variants = computed(() => combination.value?.variants.filter(v => v.price > 0) || [])
 
 export const variant = computed(() => {
-    // console.log('find variant')
+    console.log('find variant')
     const selectedValueIds = Object.values(form.options);
 
     const found = variants.value.find(variant => {
@@ -39,6 +39,8 @@ export const variant = computed(() => {
         }
         return true;
     });
+
+    console.log('found variant', found)
 
     return found
 });

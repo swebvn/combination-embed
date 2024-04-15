@@ -6,7 +6,6 @@ import Combination from "./components/Combination.vue";
 import {setCombination, variant} from "./store.ts";
 import {TooltipProvider} from 'radix-vue'
 
-
 export type AppProps = {
   product: Product,
   combinationId: number,
@@ -16,7 +15,6 @@ export type AppProps = {
     price: string
   }
 }
-
 
 const props = defineProps<AppProps>()
 
