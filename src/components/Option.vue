@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {computed, defineProps} from 'vue';
 import {Option} from '../lib/types';
-import {options, variants, form} from "../store";
+import {variants, form} from "../store";
 
 const {option, dependsOn} = defineProps<{
   option: Option,
