@@ -5,9 +5,10 @@ import {form, variants} from "../store";
 import {TooltipArrow, TooltipContent, TooltipRoot, TooltipTrigger} from 'radix-vue'
 import ValueSwatch from "./ValueSwatch.vue";
 
-const {option, dependsOn} = defineProps<{
+const {option, dependsOn, isExtra } = defineProps<{
   option: Option,
-  dependsOn: number[]
+  dependsOn: number[],
+  isExtra: boolean
 }>()
 
 const values = computed(() => {
@@ -64,6 +65,15 @@ const values = computed(() => {
           <TooltipTrigger as-child>
             <label class="value-wrapper">
               <input type="radio"
+                     v-if="isExtra"
+                     v-model="form.extraOptions[option.id]"
+                     :name="`option-${option.id}`"
+                     :value="value.id"
+                     required
+                     style="display: none">
+
+              <input type="radio"
+                     v-else
                      v-model="form.options[option.id]"
                      :name="`option-${option.id}`"
                      :value="value.id"

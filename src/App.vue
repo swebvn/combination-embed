@@ -43,17 +43,7 @@ onBeforeMount(function hideOldPrice() {
 watch(
     () => variant.value,
     (newVal) => {
-      if (newVal) {
-        const priceWrapper = document.querySelector(props.injectors.price);
-        if (priceWrapper) {
-          // priceWrapper.innerHTML = newVal.price_formatted
-        }
 
-        const galleryWrapper = document.querySelector(props.injectors.preview);
-        if (galleryWrapper) {
-          galleryWrapper.append();
-        }
-      }
     },
     {deep: true}
 )
@@ -69,20 +59,20 @@ watch(
         <Combination :combination="combinationData"/>
       </div>
 
-      <div v-if="variant">
-          <!-- price -->
+      <input type="hidden" name="variant_id" :value="variant?.id" />
+
+      <div v-if="variant" :key="variant?.id">
+        <!-- price -->
         <Teleport :to="props.injectors.price">
           <span class="price">{{ variant.price_formatted }}</span>
         </Teleport>
 
         <!-- preview image -->
-<!--        <Teleport to="document.querySelector(props.injectors.preview)">-->
-<!--          <div class="thumbnail">-->
-<!--            <div class="absolute bottom-0 right-0 mb-4 mr-4 size-24 outline outline-white">-->
-<!--              <img :src="variant?.image_src" class="object-cover" alt="preview image">-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </Teleport>-->
+        <Teleport :to="props.injectors.preview">
+          <div class="thumbnail">
+            <img :src="variant.image_src" class="object-cover" alt="preview image">
+          </div>
+        </Teleport>
       </div>
     </TooltipProvider>
   </div>
@@ -95,6 +85,7 @@ watch(
   font-weight: 700;
   font-variant-numeric: tabular-nums;
 }
+
 .thumbnail {
   position: absolute;
   bottom: 0;
@@ -105,6 +96,7 @@ watch(
   height: 6rem;
   outline: 1px solid white;
 }
+
 .thumbnail > img {
   object-fit: cover;
   width: 100%;

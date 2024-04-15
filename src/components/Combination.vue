@@ -8,10 +8,14 @@ const {combination} = defineProps<{
   combination: Combination
 }>()
 
-onMounted(() => {
+onMounted(function initDefaultVariant()  {
   if (Object.keys(form.options).length === 0) {
     form.options = combination.variants[0].options_map;
   }
+
+  combination.extra_options.map(ex => {
+    form.extraOptions[ex.id] = ex.values[0].id;
+  })
 })
 
 function findDependentOptions(option: OptionType): number[] {
@@ -30,12 +34,14 @@ function addToCart() {
             :key="option.id"
             :option="option"
             :depends-on="findDependentOptions(option)"
+            :is-extra="false"
     />
 
     <Option v-for="option in combination.extra_options"
             :key="option.id"
             :option="option"
             :depends-on="[]"
+            :is-extra="true"
     />
 
 

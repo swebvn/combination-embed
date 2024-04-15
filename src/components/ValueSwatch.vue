@@ -23,8 +23,8 @@ if (value.image_src) {
     <img :src="value.image_src" :alt="value.name" />
   </div>
 </template>
-<style>
 
+<style>
 .value-text {
   font-size: 0.85rem;
   border: 1px solid #e3e3e3;
