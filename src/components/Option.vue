@@ -9,8 +9,13 @@ const { option, dependsOn } = defineProps<{
 }>()
 
 const values = computed(() => {
+  const dependsOnOptions = find
     return option.values
 })
+
+function findDependentOptions(option: Option): number[] {
+    return dependsOn || [];
+}
 </script>
 
 <template>
@@ -24,7 +29,7 @@ const values = computed(() => {
                     <input type="radio" v-model="form.options[option.id]" :name="`option-${option.id}`" :value="value.id" required style="display: none">
 
                     <div v-if="!value.color" class="basic-value" v-text="value.name" />
-                    <div v-else="value.color" class="color-swatch" :style="{ background: value.color }"></div>
+                    <div v-else="value.color" class="color-swatch" :style="{ background: value.color }" />
                 </label>
             </template>
         </div>
