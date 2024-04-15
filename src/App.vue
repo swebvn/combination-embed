@@ -37,20 +37,6 @@ onBeforeMount(function hideOldPrice() {
     priceWrapper.innerHTML = '';
   }
 })
-
-watch(
-    () => variant.value,
-    (newVal) => {
-      // if (newVal) {
-      //   const priceWrapper = document.querySelector(props.injectors.price);
-      //   if (priceWrapper) {
-      //     priceWrapper.innerHTML = newVal.price_formatted;
-      //   }
-      // }
-    },
-    {deep: true}
-)
-
 </script>
 
 <template>
@@ -58,7 +44,7 @@ watch(
     <TooltipProvider :delay-duration="100">
       <div v-if="loading">loading...</div>
 
-      <div v-if="variant" :key="variant?.id">
+      <div v-if="variant && !loading">
         <!-- price -->
         <Teleport :to="props.injectors.price">
           <span class="price">{{ variant.price_formatted }}</span>
