@@ -19,9 +19,13 @@ function findDependentOptions(option: OptionType): number[] {
     return opt.position < option.position
   }).map(opt => opt.id)
 }
+
+function addToCart() {
+
+}
 </script>
 <template>
-  <form>
+  <form @submit.prevent="addToCart">
     <Option v-for="option in combination.options"
             :key="option.id"
             :option="option"
